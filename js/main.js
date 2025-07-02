@@ -1,6 +1,5 @@
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
-const muteBtn = document.getElementById('muteBtn');
 const gameWrapper = document.getElementById('gameWrapper');
 const startScreen = document.getElementById('startScreen');
 const gameOver = document.getElementById('gameOver');
@@ -8,15 +7,6 @@ const scoreDisplay = document.getElementById('scoreDisplay');
 const finalScore = document.getElementById('finalScore');
 const player = document.getElementById('player');
 const obstacleContainer = document.getElementById('obstacleContainer');
-const bgMusic = document.getElementById('bgMusic');
-
-let muted = false;
-
-muteBtn.addEventListener('click', () => {
-  muted = !muted;
-  bgMusic.muted = muted;
-  muteBtn.textContent = muted ? "🔇 Muted" : "🔈 Sound On";
-});
 
 let score = 0;
 let gravity = 0.4;
@@ -47,15 +37,11 @@ function startGame() {
   startScreen.classList.add('hidden');
   lastTime = performance.now();
 
-  bgMusic.volume = 0.25;
-  if (!muted) bgMusic.play();
-
   requestAnimationFrame(gameLoop);
 }
 
 function endGame() {
   gameRunning = false;
-  bgMusic.pause();
   finalScore.textContent = 'Score: ' + score;
   gameOver.classList.remove('hidden');
   gameWrapper.classList.add('hidden');
